@@ -1,0 +1,5 @@
+type;level
+Indemne;0
+Blessé léger;2
+Blessé hospitalisé;5
+Tué;10
