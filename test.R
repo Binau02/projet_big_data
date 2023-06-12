@@ -1,3 +1,3 @@
-xi <- c(420, 380, 350, 400, 440, 380, 450, 420)
-yi <- c(5.5, 6, 6.5, 6, 5, 6.5, 4.5, 5)
-plot(xi, yi)
+# test <- read.csv('/Users/aubin/Documents/ecole/isen/CIR3/big data/projet_big_data/stat_acc_V3.csv', sep=';')
+test <- read.csv('stat_acc_V3.csv', sep=';')
+print(test)
