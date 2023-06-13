@@ -62,7 +62,7 @@ test <- test[order(test, decreasing = TRUE)]
 barplot(head(test, n = 30), las = 2)
 
 # r.install(tidyverse)
-library(tidyverse)
+# library(tidyverse)
 # library(dplyr)
 # library(sf)
 # library(ggplot2)
