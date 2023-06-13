@@ -86,6 +86,8 @@ summarize()
 
 depts <- vector(mode = "numeric", length = 97)
 reg <- vector(mode = "numeric", length = 94)
+depts_grave <- vector(mode = "numeric", length = 97)
+reg_grave <- vector(mode = "numeric", length = 94)
 # print(depts)
 for (i in seq_len(nrow(df))) {
   n <- as.numeric(substr(df$id_code_insee[i], 1, 2))
@@ -99,9 +101,15 @@ for (i in seq_len(nrow(df))) {
   }
   if (n >= 1 && n <= 96) {
     depts[n] <- depts[n] + 1
+    if (df$gravity[i] >= 5) {
+      depts_grave[n] <- depts_grave[n] + 1
+    }
   }
   n <- as.numeric(df$CODE_REG[i])
   reg[n] <- reg[n] + 1
+  if (df$gravity[i] >= 5) {
+    reg_grave[n] <- reg_grave[n] + 1
+  }
 }
 for (i in seq_len(nrow(departements_L93))) {
   n <- as.numeric(departements_L93$CODE_DEPT[i])
@@ -114,12 +122,23 @@ for (i in seq_len(nrow(departements_L93))) {
     }
   }
   departements_L93$acc[i] <- depts[n]
+  if (depts_grave[n] != 0) {
+    departements_L93$taux_acc_grave[i] <- depts[n] / depts_grave[n]
+  }
+  else {
+    departements_L93$taux_acc_grave[i] <- 0
+  }
 }
 for (i in seq_len(nrow(region_L93))) {
   region_L93$acc[i] <- reg[as.numeric(region_L93$CODE_REG[i])]
+  if (reg_grave[as.numeric(region_L93$CODE_REG[i])] != 0) {
+    region_L93$taux_acc_grave[i] <- reg[as.numeric(region_L93$CODE_REG[i])] / reg_grave[as.numeric(region_L93$CODE_REG[i])]
+  }
+  else {
+    region_L93$taux_acc_grave[i] <- 0
+  }
 }
-# print(depts)
-
+  
 #departements map
 g_departement <- ggplot(departements_L93) +
   aes(color = acc) +
@@ -130,7 +149,7 @@ g_departement <- ggplot(departements_L93) +
   scale_fill_continuous(low = "yellow", high = "red") +
   coord_sf(crs = 4326) +
   guides(fill = FALSE) +
-  ggtitle("Départements") +
+  ggtitle("Nombre d'accidents par département") +
   theme(title = element_text(size = 16), plot.margin = unit(c(0,0.1,0,0.25), "inches"))
 print(g_departement)
 
@@ -142,6 +161,32 @@ g_region <- ggplot(region_L93) +
   scale_fill_continuous(low = "yellow", high = "red") +
   coord_sf(crs = 2154, datum = sf::st_crs(2154)) +
   guides(fill = FALSE) +
-  ggtitle("Régions") +
+  ggtitle("Nombre d'accidents par région") +
   theme(title = element_text(size = 16))
 print(g_region)
+
+#departements map
+g_departement <- ggplot(departements_L93) +
+  aes(color = acc) +
+  scale_color_continuous(low = "yellow", high = "red") +
+  geom_sf(aes(fill = acc)) +
+  # scale_fill_viridis_d() +
+  # scale_color_gradient(low = "green", high = "red") +
+  scale_fill_continuous(low = "yellow", high = "red") +
+  coord_sf(crs = 4326) +
+  guides(fill = FALSE) +
+  ggtitle("Taux d'accidents graves par département") +
+  theme(title = element_text(size = 16), plot.margin = unit(c(0,0.1,0,0.25), "inches"))
+print(g_departement)
+
+#regions map
+# g_region <- ggplot(region_L93) +
+#   # aes(fill = CODE_REG) +
+#   # scale_fill_viridis_d() +
+#   geom_sf(aes(fill = acc)) +
+#   scale_fill_continuous(low = "yellow", high = "red") +
+#   coord_sf(crs = 2154, datum = sf::st_crs(2154)) +
+#   guides(fill = FALSE) +
+#   ggtitle("Régions") +
+#   theme(title = element_text(size = 16))
+# print(g_region)
