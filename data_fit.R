@@ -214,5 +214,4 @@ dev.off()
 
 
 M <- 
-dimnames(M) <- list()
 (test <- chisq.test(M))
