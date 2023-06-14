@@ -173,3 +173,12 @@ g_region <- ggplot(region_L93) +
 png(file = "./export/taux_acc_grave_par_reg.png")
 print(g_region)
 dev.off()
+
+# afficher les données en mois
+png(file = "./export/nb_acc_par_mois.png")
+hist(df$month, breaks = max(df$month)-min(df$month), main = "number of accident by month", xlab = "months", ylab = "number of accident")
+dev.off()
+# afficher les données en heures
+png(file = "./export/nb_acc_par_heure.png")
+hist(df$hours, breaks = max(df$hours)-min(df$hours), main = "number of accident by hours", xlab = "hours", ylab = "number of accident")
+dev.off()

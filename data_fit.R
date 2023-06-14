@@ -33,3 +33,25 @@ df <- df[-test, ]
 
 df$age <- as.numeric(df$age)
 df$age <- df$age - 14
+
+
+# creating month, years, days, weeks, hours columns / date -> timestamp
+for (i in 1:length(df$date)) {
+
+  #my_date <- as.Date(df$date[i])
+  my_date <- as.POSIXct(df$date[i])
+
+  months <- as.numeric(format(my_date, format = "%m"))
+  years <- as.numeric(format(my_date, format = "%Y"))
+  days <- as.numeric(format(my_date, format = "%d"))
+  weeks <- as.numeric(format(my_date, format = "%W"))
+  hours <- as.numeric(format(my_date, format = "%H"))
+
+  df$month[i] <- months
+  df$years[i] <- years
+  df$days[i] <-  days
+  df$weeks[i] <- weeks
+  df$hours[i] <- hours
+  
+  df$date[i] <- (as.numeric(as.POSIXct(df$date[i], format="%Y-%m-%d  %H:%M:%S")))
+}
