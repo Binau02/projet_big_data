@@ -9,8 +9,6 @@ library(ggplot2)
 library(tmap)
 library(leaflet)
 
-
-
 df <- read.csv("csv/stat_acc_V3.csv", sep = ";")
 weights <- read.csv("csv/poids_vehicules.csv", sep = ";")
 gravity <- read.csv("csv/niveaux_gravite.csv", sep = ";")
