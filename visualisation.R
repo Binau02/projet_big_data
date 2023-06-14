@@ -179,7 +179,6 @@ hist(df$hours, breaks = max(df$hours)-min(df$hours), main = "number of accident 
 dev.off()
 
 #indiquer les formats de chaque colonnes
-
 df <- as.tibble(df)
 as.tibble(df)
 
