@@ -4,8 +4,8 @@
 
 # install.packages("installr", dependencies = TRUE)
 
-library(installr)
-updateR()
+# library(installr)
+# updateR()
 
 # install.packages("tidyverse")
 # install.packages("dplyr")
@@ -13,8 +13,7 @@ updateR()
 # install.packages("ggplot2")
 # install.packages("tmap")
 # install.packages("leaflet")
-install.packages("car")
-install.packages("RColorBrewer")
+#install.packages("car")
 
 # library(tidyverse)
 # library(dplyr)
@@ -23,7 +22,6 @@ install.packages("RColorBrewer")
 # library(tmap)
 # library(leaflet)
 library(car)
-library(RColorBrewer)
 
 
 df <- read.csv("data/stat_acc_V3.csv", sep = ";")
