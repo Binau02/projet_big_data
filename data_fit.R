@@ -2,25 +2,19 @@
 # DATA fitting #
 ################
 
-# install.packages("installr", dependencies = TRUE)
-
-# library(installr)
-# updateR()
 
 # install.packages("tidyverse")
 # install.packages("dplyr")
 # install.packages("sf")
 # install.packages("ggplot2")
-# install.packages("tmap")
-# install.packages("leaflet")
-#install.packages("car")
+# install.packages("car")
 
-# library(tidyverse)
-# library(dplyr)
-# library(sf)
-# library(ggplot2)
-# library(tmap)
-# library(leaflet)
+library(tidyverse)
+library(dplyr)
+library(sf)
+library(ggplot2)
+library(tmap)
+library(leaflet)
 library(car)
 
 
@@ -45,18 +39,24 @@ for (i in seq_len(nrow(dept))) {
   df$CODE_REG[substr(df$id_code_insee, 1, 2) == dept[i, 1]] <- dept[i, 3]
 }
 
-test <- c()
+temp <- c()
 for (i in seq_len(nrow(df))) {
   if (df$age[i] == "NULL") {
-    test <- append(test, i)
+    temp <- append(temp, i)
   }
 }
 
-df <- df[-test, ]
+df <- df[-temp, ]
+
+df$place[df$place == "NULL"] <- 1
 
 df$age <- as.numeric(df$age)
 df$age <- df$age - 14
 
+weeks_cumul <- vector(length = 53)
+weeks_gravity_cumul <- vector(length = 53)
+month_cumul <- vector(length = 12)
+month_gravity_cumul <- vector(length = 12)
 
 # creating month, years, days, weeks, hours columns / date -> timestamp
 for (i in 1:length(df$date)) {
@@ -75,7 +75,12 @@ for (i in 1:length(df$date)) {
   df$weeks[i] <- weeks
   df$hours[i] <- hours
 
-  df$date[i] <- (as.numeric(as.POSIXct(df$date[i], format = "%Y-%m-%d  %H:%M:%S")))
+  weeks_cumul[(weeks + 1):53] <- weeks_cumul[(weeks + 1):53] + 1
+  weeks_gravity_cumul[(weeks + 1):53] <- weeks_gravity_cumul[(weeks + 1):53] + df$gravity[i]
+  month_cumul[months:12] <- month_cumul[months:12] + 1
+  month_gravity_cumul[months:12] <- month_gravity_cumul[months:12] + df$gravity[i]
+
+  df$date[i] <- as.numeric(as.POSIXct(df$date[i], format = "%Y-%m-%d  %H:%M:%S"))
 }
 
 for (i in seq_len(nrow(climat))) {
