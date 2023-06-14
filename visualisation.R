@@ -37,14 +37,14 @@ png(file = "./export/nb_acc_par_ville_top_30.png")
 barplot(head(test, n = 30), las = 2)
 dev.off()
 
-#map
+#mapcsv
 extraWD <- "."
 
-if (!file.exists(file.path(extraWD, "departement.zip"))) {
-  githubURL <- "https://github.com/statnmap/blog_tips/raw/master/2018-07-14-introduction-to-mapping-with-sf-and-co/data/departement.zip"
-  download.file(githubURL, file.path(extraWD, "departement.zip"))
-  unzip(file.path(extraWD, "departement.zip"), exdir = extraWD)
-}
+# if (!file.exists(file.path(extraWD, "departement.zip"))) {
+#   githubURL <- "https://github.com/statnmap/blog_tips/raw/master/2018-07-14-introduction-to-mapping-with-sf-and-co/data/departement.zip"
+#   download.file(githubURL, file.path(extraWD, "departement.zip"))
+#   unzip(file.path(extraWD, "departement.zip"), exdir = extraWD)
+# }
 
 #use database
 departements_L93 <- st_read(dsn = extraWD, layer = "DEPARTEMENT", quiet = TRUE) %>% 

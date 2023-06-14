@@ -73,3 +73,11 @@ for (i in seq_len(nrow(climat))) {
 for (i in seq_len(nrow(etat))) {
   df$descr_etat_surf[df$descr_etat_surf == etat[i, 1]] <- as.numeric(etat[i, 2])
 }
+
+#indiquer les formats de chaque colonnes
+df <- as.tibble(df)
+as.tibble(df)
+
+#tracer les regression lineaires
+library(car)
+scatterplot(df~education, data=df) 
