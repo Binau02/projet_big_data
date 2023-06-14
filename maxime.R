@@ -78,3 +78,7 @@ cat("gravité et poids :", a, "\ngravité et etat surface :", b, "\ngravité et 
 # print(khi_test$p.value)
 # khi_test$p.value
 # print("end")
+
+
+library(car)
+scatterplot(df$weeks, data=df)
