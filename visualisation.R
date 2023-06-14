@@ -8,6 +8,7 @@ png(file = "./export/nb_acc_par_age.png")
 hist(df$age, breaks = max(df$age) - min(df$age) + 1, main = "number of accident by age", xlab = "age", ylab = "number of accident")
 dev.off()
 
+
 # plot by athmospheric conditions
 png(file = "./export/nb_acc_par_athmo.png")
 barplot(table(df$descr_athmo), las = 2)
