@@ -211,7 +211,3 @@ g_region <- ggplot(region_L93) +
 png(file = "./export/taux_acc_grave_par_reg.png")
 print(g_region)
 dev.off()
-
-
-M <- 
-(test <- chisq.test(M))
