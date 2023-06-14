@@ -2,12 +2,21 @@
 # DATA fitting #
 ################
 
+install.packages("tidyverse")
+install.packages("dplyr")
+install.packages("sf")
+install.packages("ggplot2")
+install.packages("tmap")
+install.packages("leaflet")
+install.packages("car")
+
 library(tidyverse)
 library(dplyr)
 library(sf)
 library(ggplot2)
 library(tmap)
 library(leaflet)
+library(car)
 
 
 
