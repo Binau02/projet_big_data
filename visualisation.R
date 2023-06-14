@@ -39,12 +39,7 @@ dev.off()
 
 #map
 extraWD <- "."
-library(tidyverse)
-library(dplyr)
-library(sf)
-library(ggplot2)
-library(tmap)
-library(leaflet)
+
 if (!file.exists(file.path(extraWD, "departement.zip"))) {
   githubURL <- "https://github.com/statnmap/blog_tips/raw/master/2018-07-14-introduction-to-mapping-with-sf-and-co/data/departement.zip"
   download.file(githubURL, file.path(extraWD, "departement.zip"))
