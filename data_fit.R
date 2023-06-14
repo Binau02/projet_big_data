@@ -9,6 +9,7 @@ install.packages("ggplot2")
 install.packages("tmap")
 install.packages("leaflet")
 install.packages("car")
+install.packages("RColorBrewer")
 
 library(tidyverse)
 library(dplyr)
@@ -17,6 +18,7 @@ library(ggplot2)
 library(tmap)
 library(leaflet)
 library(car)
+library(RColorBrewer)
 
 
 

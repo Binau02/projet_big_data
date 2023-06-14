@@ -34,7 +34,6 @@ a <- khi_test$p.value
 
 # khi entre gravité et état de la route
 khi_test <- chisq.test(table(df$gravity, df$descr_etat_surf))
-print(khi_test)
 png(file = "export/mosaic_gravite_etat_route.png")
 mosaicplot(table(df$gravity, df$descr_etat_surf), color = brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre gravité et etat de la surface")
 dev.off()
