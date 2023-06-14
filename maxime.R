@@ -1,10 +1,3 @@
-for (i in seq_len(nrow(climat))) {
-df$descr_athmo[df$descr_athmo == climat[i, 1]] <- as.numeric(climat[i, 2])
-}
-
-for (i in seq_len(nrow(etat))) {
-df$descr_etat_surf[df$descr_etat_surf == etat[i, 1]] <- as.numeric(etat[i, 2])
-}
 
 # preparation_données(df, weights, gravity, dept)
 
