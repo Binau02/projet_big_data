@@ -2,6 +2,14 @@
 # DATA fitting #
 ################
 
+library(tidyverse)
+library(dplyr)
+library(sf)
+library(ggplot2)
+library(tmap)
+library(leaflet)
+
+
 
 df <- read.csv("stat_acc_V3.csv", sep = ";")
 weights <- read.csv("poids_vehicules.csv", sep = ";")
@@ -57,9 +65,9 @@ for (i in 1:length(df$date)) {
 }
 
 for (i in seq_len(nrow(climat))) {
-df$descr_athmo[df$descr_athmo == climat[i, 1]] <- as.numeric(climat[i, 2])
+  df$descr_athmo[df$descr_athmo == climat[i, 1]] <- as.numeric(climat[i, 2])
 }
 
 for (i in seq_len(nrow(etat))) {
-df$descr_etat_surf[df$descr_etat_surf == etat[i, 1]] <- as.numeric(etat[i, 2])
+  df$descr_etat_surf[df$descr_etat_surf == etat[i, 1]] <- as.numeric(etat[i, 2])
 }
