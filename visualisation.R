@@ -177,3 +177,12 @@ dev.off()
 png(file = "./export/nb_acc_par_heure.png")
 hist(df$hours, breaks = max(df$hours)-min(df$hours), main = "number of accident by hours", xlab = "hours", ylab = "number of accident")
 dev.off()
+
+#indiquer les formats de chaque colonnes
+
+df <- as.tibble(df)
+as.tibble(df)
+
+#tracer les regression lineaires
+library(car)
+scatterplot(hours~gravity, data=df) 
