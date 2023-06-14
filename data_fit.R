@@ -11,12 +11,12 @@ library(leaflet)
 
 
 
-df <- read.csv("csv/stat_acc_V3.csv", sep = ";")
-weights <- read.csv("csv/poids_vehicules.csv", sep = ";")
-gravity <- read.csv("csv/niveaux_gravite.csv", sep = ";")
-climat <- read.csv("csv/climat.csv", sep = ";")
-etat <- read.csv("csv/etat.csv", sep = ";")
-dept <- read.csv("csv/departements-france.csv")
+df <- read.csv("data/stat_acc_V3.csv", sep = ";")
+weights <- read.csv("data/poids_vehicules.csv", sep = ";")
+gravity <- read.csv("data/niveaux_gravite.csv", sep = ";")
+climat <- read.csv("data/climat.csv", sep = ";")
+etat <- read.csv("data/etat.csv", sep = ";")
+dept <- read.csv("data/departements-france.csv")
 
 for (i in seq_len(nrow(weights))) {
   df$weight[df$descr_cat_veh == weights[i, 1]] <- as.numeric(weights[i, 2])
@@ -47,8 +47,7 @@ df$age <- df$age - 14
 
 # creating month, years, days, weeks, hours columns / date -> timestamp
 for (i in 1:length(df$date)) {
-
-  #my_date <- as.Date(df$date[i])
+  # my_date <- as.Date(df$date[i])
   my_date <- as.POSIXct(df$date[i])
 
   months <- as.numeric(format(my_date, format = "%m"))
@@ -59,17 +58,17 @@ for (i in 1:length(df$date)) {
 
   df$month[i] <- months
   df$years[i] <- years
-  df$days[i] <-  days
+  df$days[i] <- days
   df$weeks[i] <- weeks
   df$hours[i] <- hours
-  
-  df$date[i] <- (as.numeric(as.POSIXct(df$date[i], format="%Y-%m-%d  %H:%M:%S")))
+
+  df$date[i] <- (as.numeric(as.POSIXct(df$date[i], format = "%Y-%m-%d  %H:%M:%S")))
 }
 
 for (i in seq_len(nrow(climat))) {
-  df$descr_athmo[df$descr_athmo == climat[i, 1]] <- as.numeric(climat[i, 2])
+  df$athmo_num[df$descr_athmo == climat[i, 1]] <- as.numeric(climat[i, 2])
 }
 
 for (i in seq_len(nrow(etat))) {
-  df$descr_etat_surf[df$descr_etat_surf == etat[i, 1]] <- as.numeric(etat[i, 2])
+  df$etat_surf_num[df$descr_etat_surf == etat[i, 1]] <- as.numeric(etat[i, 2])
 }

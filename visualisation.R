@@ -5,14 +5,14 @@
 
 # plot by age
 png(file = "./export/nb_acc_par_age.png")
-hist(df$age, breaks = max(df$age)-min(df$age)+1, main = "number of accident by age", xlab = "age", ylab = "number of accident")
+hist(df$age, breaks = max(df$age) - min(df$age) + 1, main = "number of accident by age", xlab = "age", ylab = "number of accident")
 dev.off()
 
 # plot by athmospheric conditions
-png(file="./export/nb_acc_par_athmo.png")
+png(file = "./export/nb_acc_par_athmo.png")
 barplot(table(df$descr_athmo), las = 2)
 dev.off()
-png(file="./export/nb_acc_par_athmo_anormale.png")
+png(file = "./export/nb_acc_par_athmo_anormale.png")
 barplot(table(df$descr_athmo)[-4], las = 2)
 dev.off()
 
@@ -37,23 +37,17 @@ png(file = "./export/nb_acc_par_ville_top_30.png")
 barplot(head(test, n = 30), las = 2)
 dev.off()
 
-#mapcsv
-extraWD <- "."
+# mapcsv
+extraWD <- "./data"
 
-# if (!file.exists(file.path(extraWD, "departement.zip"))) {
-#   githubURL <- "https://github.com/statnmap/blog_tips/raw/master/2018-07-14-introduction-to-mapping-with-sf-and-co/data/departement.zip"
-#   download.file(githubURL, file.path(extraWD, "departement.zip"))
-#   unzip(file.path(extraWD, "departement.zip"), exdir = extraWD)
-# }
+# use database
+departements_L93 <- st_read(dsn = extraWD, layer = "DEPARTEMENT", quiet = TRUE) %>%
+  st_transform(2154)
 
-#use database
-departements_L93 <- st_read(dsn = extraWD, layer = "DEPARTEMENT", quiet = TRUE) %>% 
-st_transform(2154)
-
-#transform departements into regions
-region_L93 <- departements_L93 %>% 
-group_by(CODE_REG, NOM_REG) %>% 
-summarize()
+# transform departements into regions
+region_L93 <- departements_L93 %>%
+  group_by(CODE_REG, NOM_REG) %>%
+  summarize()
 
 depts <- vector(mode = "numeric", length = 97)
 reg <- vector(mode = "numeric", length = 94)
@@ -64,8 +58,7 @@ for (i in seq_len(nrow(df))) {
   if (is.na(n)) {
     if (substr(df$id_code_insee[i], 1, 2) == "2A") {
       n <- 96
-    }
-    else {
+    } else {
       n <- 97
     }
   }
@@ -86,16 +79,14 @@ for (i in seq_len(nrow(departements_L93))) {
   if (is.na(n)) {
     if (departements_L93$CODE_DEPT[i] == "2A") {
       n <- 96
-    }
-    else {
+    } else {
       n <- 97
     }
   }
   departements_L93$acc[i] <- depts[n]
   if (depts[n] != 0) {
     departements_L93$taux_acc_grave[i] <- depts_grave[n] / depts[n] * 100
-  }
-  else {
+  } else {
     departements_L93$taux_acc_grave[i] <- 0
   }
 }
@@ -103,13 +94,12 @@ for (i in seq_len(nrow(region_L93))) {
   region_L93$acc[i] <- reg[as.numeric(region_L93$CODE_REG[i])]
   if (reg[as.numeric(region_L93$CODE_REG[i])] != 0) {
     region_L93$taux_acc_grave[i] <- reg_grave[as.numeric(region_L93$CODE_REG[i])] / reg[as.numeric(region_L93$CODE_REG[i])] * 100
-  }
-  else {
+  } else {
     region_L93$taux_acc_grave[i] <- 0
   }
 }
 
-#departements map
+# departements map
 g_departement <- ggplot(departements_L93) +
   aes(color = acc) +
   scale_color_continuous(low = "yellow", high = "red") +
@@ -118,13 +108,13 @@ g_departement <- ggplot(departements_L93) +
   coord_sf(crs = 4326) +
   guides(fill = FALSE) +
   ggtitle("Nombre d'accidents par département") +
-  theme(title = element_text(size = 16), plot.margin = unit(c(0,0.1,0,0.25), "inches"))
+  theme(title = element_text(size = 16), plot.margin = unit(c(0, 0.1, 0, 0.25), "inches"))
 
 png(file = "./export/nb_acc_par_dept.png")
 print(g_departement)
 dev.off()
 
-#regions map
+# regions map
 g_region <- ggplot(region_L93) +
   aes(color = acc) +
   scale_color_continuous(low = "yellow", high = "red") +
@@ -139,7 +129,7 @@ png(file = "./export/nb_acc_par_reg.png")
 print(g_region)
 dev.off()
 
-#departements map
+# departements map
 g_departement <- ggplot(departements_L93) +
   aes(color = taux_acc_grave) +
   scale_color_continuous(low = "yellow", high = "red") +
@@ -148,13 +138,13 @@ g_departement <- ggplot(departements_L93) +
   coord_sf(crs = 4326) +
   guides(fill = FALSE) +
   ggtitle("Taux d'accidents graves par département") +
-  theme(title = element_text(size = 16), plot.margin = unit(c(0,0.1,0,0.25), "inches"))
+  theme(title = element_text(size = 16), plot.margin = unit(c(0, 0.1, 0, 0.25), "inches"))
 
 png(file = "./export/taux_acc_grave_par_dept.png")
 print(g_departement)
 dev.off()
 
-#regions map
+# regions map
 g_region <- ggplot(region_L93) +
   aes(color = taux_acc_grave) +
   scale_color_continuous(low = "yellow", high = "red") +
@@ -171,17 +161,18 @@ dev.off()
 
 # afficher les données en mois
 png(file = "./export/nb_acc_par_mois.png")
-hist(df$month, breaks = max(df$month)-min(df$month), main = "number of accident by month", xlab = "months", ylab = "number of accident")
+hist(df$month, breaks = max(df$month) - min(df$month), main = "number of accident by month", xlab = "months", ylab = "number of accident")
 dev.off()
 # afficher les données en heures
 png(file = "./export/nb_acc_par_heure.png")
-hist(df$hours, breaks = max(df$hours)-min(df$hours), main = "number of accident by hours", xlab = "hours", ylab = "number of accident")
+hist(df$hours, breaks = max(df$hours) - min(df$hours), main = "number of accident by hours", xlab = "hours", ylab = "number of accident")
 dev.off()
 
-#indiquer les formats de chaque colonnes
+# indiquer les formats de chaque colonnes
+library(tidyverse)
 df <- as.tibble(df)
 as.tibble(df)
 
-#tracer les regression lineaires
+# tracer les regression lineaires
 library(car)
-scatterplot(hours~gravity, data=df) 
+scatterplot(hours ~ gravity, data = df)
