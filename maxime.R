@@ -63,7 +63,7 @@ khi_test <- chisq.test(table(df$an_nais, df$id_usa))
 # print(khi_test$p.value)
 e <- khi_test$p.value
 
-cat("gravité et poids :", a, "\ngravité et etat surface :", b, "\ngravité et athmo :", c, "\netat surf et athmo :", d, "\n", "id_usa et age naissance : ", e)
+cat("gravité et poids :", a, "\ngravité et etat surface :", b, "\ngravité et athmo :", c, "\netat surf et athmo :", d, "\n", "id_usa et age naissance : ", e, "\n")
 
 # # Réalisation du test khi-deux - les résultats sont sauvegardés dans "khi_test"
 # khi_test <- chisq.test(gravpoid)
@@ -77,7 +77,3 @@ cat("gravité et poids :", a, "\ngravité et etat surface :", b, "\ngravité et 
 # print(khi_test$p.value)
 # khi_test$p.value
 # print("end")
-
-
-library(car)
-scatterplot(df$weeks, data=df)
