@@ -14,6 +14,8 @@ library(leaflet)
 df <- read.csv("stat_acc_V3.csv", sep = ";")
 weights <- read.csv("poids_vehicules.csv", sep = ";")
 gravity <- read.csv("niveaux_gravite.csv", sep = ";")
+climat <- read.csv("climat.csv", sep = ";")
+etat <- read.csv("etat.csv", sep = ";")
 dept <- read.csv("departements-france.csv")
 
 for (i in seq_len(nrow(weights))) {
