@@ -37,14 +37,14 @@ png(file = "./export/nb_acc_par_ville_top_30.png")
 barplot(head(test, n = 30), las = 2)
 dev.off()
 
-#map
+#mapcsv
 extraWD <- "."
 
-if (!file.exists(file.path(extraWD, "departement.zip"))) {
-  githubURL <- "https://github.com/statnmap/blog_tips/raw/master/2018-07-14-introduction-to-mapping-with-sf-and-co/data/departement.zip"
-  download.file(githubURL, file.path(extraWD, "departement.zip"))
-  unzip(file.path(extraWD, "departement.zip"), exdir = extraWD)
-}
+# if (!file.exists(file.path(extraWD, "departement.zip"))) {
+#   githubURL <- "https://github.com/statnmap/blog_tips/raw/master/2018-07-14-introduction-to-mapping-with-sf-and-co/data/departement.zip"
+#   download.file(githubURL, file.path(extraWD, "departement.zip"))
+#   unzip(file.path(extraWD, "departement.zip"), exdir = extraWD)
+# }
 
 #use database
 departements_L93 <- st_read(dsn = extraWD, layer = "DEPARTEMENT", quiet = TRUE) %>% 
@@ -177,3 +177,11 @@ dev.off()
 png(file = "./export/nb_acc_par_heure.png")
 hist(df$hours, breaks = max(df$hours)-min(df$hours), main = "number of accident by hours", xlab = "hours", ylab = "number of accident")
 dev.off()
+
+#indiquer les formats de chaque colonnes
+df <- as.tibble(df)
+as.tibble(df)
+
+#tracer les regression lineaires
+library(car)
+scatterplot(hours~gravity, data=df) 
