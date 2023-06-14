@@ -55,3 +55,11 @@ for (i in 1:length(df$date)) {
   
   df$date[i] <- (as.numeric(as.POSIXct(df$date[i], format="%Y-%m-%d  %H:%M:%S")))
 }
+
+for (i in seq_len(nrow(climat))) {
+df$descr_athmo[df$descr_athmo == climat[i, 1]] <- as.numeric(climat[i, 2])
+}
+
+for (i in seq_len(nrow(etat))) {
+df$descr_etat_surf[df$descr_etat_surf == etat[i, 1]] <- as.numeric(etat[i, 2])
+}
