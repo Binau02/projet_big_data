@@ -9,13 +9,13 @@
 # install.packages("ggplot2")
 # install.packages("car")
 
-library(tidyverse)
-library(dplyr)
-library(sf)
-library(ggplot2)
-library(tmap)
-library(leaflet)
-library(car)
+# library(tidyverse)
+# library(dplyr)
+# library(sf)
+# library(ggplot2)
+# library(tmap)
+# library(leaflet)
+# library(car)
 
 
 df <- read.csv("data/stat_acc_V3.csv", sep = ";")
@@ -23,6 +23,7 @@ weights <- read.csv("data/poids_vehicules.csv", sep = ";")
 gravity <- read.csv("data/niveaux_gravite.csv", sep = ";")
 climat <- read.csv("data/climat.csv", sep = ";")
 etat <- read.csv("data/etat.csv", sep = ";")
+lum <- read.csv("data/lum.csv", sep = ",")
 dept <- read.csv("data/departements-france.csv")
 
 for (i in seq_len(nrow(weights))) {
@@ -64,13 +65,11 @@ for (i in 1:length(df$date)) {
   my_date <- as.POSIXct(df$date[i])
 
   months <- as.numeric(format(my_date, format = "%m"))
-  years <- as.numeric(format(my_date, format = "%Y"))
   days <- as.numeric(format(my_date, format = "%d"))
   weeks <- as.numeric(format(my_date, format = "%W"))
   hours <- as.numeric(format(my_date, format = "%H"))
 
   df$month[i] <- months
-  df$years[i] <- years
   df$days[i] <- days
   df$weeks[i] <- weeks
   df$hours[i] <- hours
@@ -82,6 +81,9 @@ for (i in 1:length(df$date)) {
 
   df$date[i] <- as.numeric(as.POSIXct(df$date[i], format = "%Y-%m-%d  %H:%M:%S"))
 }
+# df$test <- as.POSIXct(df$date, format = "%Y-%m-%d  %H:%M:%S")
+
+
 
 for (i in seq_len(nrow(climat))) {
   df$athmo_num[df$descr_athmo == climat[i, 1]] <- as.numeric(climat[i, 2])
@@ -89,4 +91,8 @@ for (i in seq_len(nrow(climat))) {
 
 for (i in seq_len(nrow(etat))) {
   df$etat_surf_num[df$descr_etat_surf == etat[i, 1]] <- as.numeric(etat[i, 2])
+}
+
+for (i in seq_len(nrow(lum))) {
+  df$lum_num[df$descr_lum == lum[i, 1]] <- as.numeric(lum[i, 2])
 }
