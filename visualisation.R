@@ -5,37 +5,37 @@
 
 # plot by age
 png(file = "./export/nb_acc_par_age.png")
-hist(df$age, breaks = max(df$age) - min(df$age) + 1, main = "number of accident by age", xlab = "age", ylab = "number of accident")
+hist(df$age, breaks = max(df$age) - min(df$age) + 1, main = "nombre d'accidents par age", xlab = "age", ylab = "number of accident")
 dev.off()
 
 
 # plot by athmospheric conditions
 png(file = "./export/nb_acc_par_athmo.png")
-barplot(table(df$descr_athmo), las = 2)
+barplot(table(df$descr_athmo), las = 2, main = "Nombre d'accidents en fonction de l'athmosphère")
 dev.off()
 png(file = "./export/nb_acc_par_athmo_anormale.png")
-barplot(table(df$descr_athmo)[-4], las = 2)
+barplot(table(df$descr_athmo)[-4], las = 2, main = "Nombre d'accidents en fonction de l'athmosphère\n(hors situation normale)")
 dev.off()
 
 # plot by surface
 png(file = "./export/nb_acc_par_surf.png")
-barplot(table(df$descr_etat_surf), las = 2)
+barplot(table(df$descr_etat_surf), las = 2, main = "Nombre d'accidents en fonction de l'état de la surface")
 dev.off()
 png(file = "./export/nb_acc_par_surf_anormale.png")
-barplot(table(df$descr_etat_surf)[-8], las = 2)
+barplot(table(df$descr_etat_surf)[-8], las = 2, main = "Nombre d'accidents en fonction de l'état de la surface\n(hors situation normale)")
 dev.off()
 
 # plot by gravity
 test <- table(df$descr_grav)
 png(file = "./export/nb_acc_par_grav.png")
-barplot(as.table(c(test["Indemne"], test["Blessé léger"], test["Blessé hospitalisé"], test["Tué"])), las = 2)
+barplot(as.table(c(test["Indemne"], test["Blessé léger"], test["Blessé hospitalisé"], test["Tué"])), las = 2, main = "Nombre d'accidents par gravité")
 dev.off()
 
 # plot by city
 test <- table(df["ville"])
 test <- test[order(test, decreasing = TRUE)]
 png(file = "./export/nb_acc_par_ville_top_30.png")
-barplot(head(test, n = 30), las = 2)
+barplot(head(test, n = 30), las = 2, main = "Nombre d'accident par ville (top 30)")
 dev.off()
 
 # mapcsv
@@ -162,15 +162,15 @@ dev.off()
 
 # afficher les données en mois
 png(file = "./export/nb_acc_par_mois.png")
-hist(df$month, breaks = max(df$month) - min(df$month), main = "number of accident by month", xlab = "months", ylab = "number of accident")
+hist(df$month, breaks = 0:12, main = "Nombre d'accident par mois", xlab = "months", ylab = "number of accident")
 dev.off()
 # afficher les données en semaines
 png(file = "./export/nb_acc_par_semaine.png")
-hist(df$weeks, breaks = max(df$weeks) - min(df$weeks), main = "number of accident by weeks", xlab = "weeks", ylab = "number of accident")
+hist(df$weeks, breaks = -1:53, main = "Nombre d'accident par semaine", xlab = "weeks", ylab = "number of accident")
 dev.off()
 # afficher les données en heures
 png(file = "./export/nb_acc_par_heure.png")
-hist(df$hours, breaks = max(df$hours) - min(df$hours), main = "number of accident by hours", xlab = "hours", ylab = "number of accident")
+hist(df$hours, breaks = -1:24, main = "Nombre d'accident par heure", xlab = "hours", ylab = "number of accident")
 dev.off()
 
 # frises chronologiques
