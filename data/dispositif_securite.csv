@@ -1,0 +1,16 @@
+descr_dispo_secu;type
+Utilisation d'un équipement réfléchissant ;1
+Présence d'un équipement réfléchissant non utilisé;2
+Présence équipement réfléchissant - Utilisation non déterminable;3
+Utilisation d'une ceinture de sécurité ;4
+Présence de ceinture de sécurité non utilisée ;5
+Présence d'une ceinture de sécurité - Utilisation non déterminable;6
+Utilisation d'un casque ;7
+Présence d'un casque non utilisé ;8
+Présence d'un casque - Utilisation non déterminable;9
+Utilisation d'un dispositif enfant;10
+Présence d'un dispositif enfant non utilisé;11
+Présence dispositif enfant - Utilisation non déterminable;12
+Autre - Utilisé;13
+Autre - Non utilisé;14
+Autre - Non déterminable;15
