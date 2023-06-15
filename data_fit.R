@@ -21,7 +21,7 @@
 # library(ggplot2)
 # library(tmap)
 # library(leaflet)
-library(car)
+# library(car)
 
 
 df <- read.csv("data/stat_acc_V3.csv", sep = ";")
@@ -64,19 +64,20 @@ for (i in 1:length(df$date)) {
   my_date <- as.POSIXct(df$date[i])
 
   months <- as.numeric(format(my_date, format = "%m"))
-  years <- as.numeric(format(my_date, format = "%Y"))
   days <- as.numeric(format(my_date, format = "%d"))
   weeks <- as.numeric(format(my_date, format = "%W"))
   hours <- as.numeric(format(my_date, format = "%H"))
 
   df$month[i] <- months
-  df$years[i] <- years
   df$days[i] <- days
   df$weeks[i] <- weeks
   df$hours[i] <- hours
 
   df$date[i] <- (as.numeric(as.POSIXct(df$date[i], format = "%Y-%m-%d  %H:%M:%S")))
 }
+# df$test <- as.POSIXct(df$date, format = "%Y-%m-%d  %H:%M:%S")
+
+
 
 for (i in seq_len(nrow(climat))) {
   df$athmo_num[df$descr_athmo == climat[i, 1]] <- as.numeric(climat[i, 2])
