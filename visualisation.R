@@ -172,3 +172,25 @@ dev.off()
 png(file = "./export/nb_acc_par_heure.png")
 hist(df$hours, breaks = max(df$hours) - min(df$hours), main = "number of accident by hours", xlab = "hours", ylab = "number of accident")
 dev.off()
+
+# frises chronologiques
+
+valeurs <- c(0:52)
+resultats <- c()
+for (i in 1:53) {
+  resultat <- sum(df$weeks == valeurs[i])
+  resultats[i] <- resultat
+}
+valeurs2 <- c(1:12)
+resultats2 <- c()
+for (i in 1:12) {
+  resultat2 <- sum(df$month == valeurs2[i])
+  resultats2[i] <- resultat2
+}
+png(file = "./export/frise_chrono_acc_months.png")
+plot(valeurs2, resultats2, type = "b", pch = 16, col = "blue", xlab = "Semaines de l'année", ylab = "Nombre d'accidents", main = "Nombre d'accidents par mois en 2009", ylim=c(0, 8000))
+dev.off()
+
+png(file = "./export/frise_chrono_acc_weeks.png")
+plot(valeurs, resultats, type = "b", pch = 16, col = "blue", xlab = "Semaines de l'année", ylab = "Nombre d'accidents", main = "Nombre d'accidents par semaine en 2009", ylim=c(0, 2000))
+dev.off()
