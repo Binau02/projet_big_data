@@ -15,7 +15,7 @@
 # library(ggplot2)
 # library(tmap)
 # library(leaflet)
-library(car)
+# library(car)
 
 
 df <- read.csv("data/stat_acc_V3.csv", sep = ";")
@@ -23,6 +23,7 @@ weights <- read.csv("data/poids_vehicules.csv", sep = ";")
 gravity <- read.csv("data/niveaux_gravite.csv", sep = ";")
 climat <- read.csv("data/climat.csv", sep = ";")
 etat <- read.csv("data/etat.csv", sep = ";")
+lum <- read.csv("data/lum.csv", sep = ",")
 dept <- read.csv("data/departements-france.csv")
 
 for (i in seq_len(nrow(weights))) {
@@ -90,4 +91,8 @@ for (i in seq_len(nrow(climat))) {
 
 for (i in seq_len(nrow(etat))) {
   df$etat_surf_num[df$descr_etat_surf == etat[i, 1]] <- as.numeric(etat[i, 2])
+}
+
+for (i in seq_len(nrow(lum))) {
+  df$lum_num[df$descr_lum == lum[i, 1]] <- as.numeric(lum[i, 2])
 }

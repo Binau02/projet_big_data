@@ -188,7 +188,7 @@ for (i in 1:12) {
   resultats2[i] <- resultat2
 }
 png(file = "./export/frise_chrono_acc_months.png")
-plot(valeurs2, resultats2, type = "b", pch = 16, col = "blue", xlab = "Semaines de l'année", ylab = "Nombre d'accidents", main = "Nombre d'accidents par mois en 2009", ylim=c(0, 8000))
+plot(valeurs2, resultats2, type = "b", pch = 16, col = "blue", xlab = "Mois de l'année", ylab = "Nombre d'accidents", main = "Nombre d'accidents par mois en 2009", ylim=c(0, 8000))
 dev.off()
 
 png(file = "./export/frise_chrono_acc_weeks.png")

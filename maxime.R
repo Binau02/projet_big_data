@@ -78,14 +78,23 @@
 # khi_test$p.value
 # print("end")
 
-# library(ggplot2)
-# qplot(df$hours, mean, data = hour_agg[hour_agg$weathersit==1 & hour_agg$yr==0,], 
-#   geom = "line") + 
-#   ggtitle("Évolution du nombre moyen de locations par heure \nen 2011 par temps dégagé") +
-#   xlab("heure") + ylab("nombre moyen de locations")
+# valeurs <- c(0:52)
+# resultats <- c()
+# for (i in 1:53) {
+#   resultat <- sum(df$weeks == valeurs[i])
+#   resultats[i] <- resultat
+# }
+# valeurs2 <- c(1:12)
+# resultats2 <- c()
+# for (i in 1:12) {
+#   resultat2 <- sum(df$month == valeurs2[i])
+#   resultats2[i] <- resultat2
+# }
+# png(file = "./export/frise_chrono_acc_months.png")
+# plot(valeurs2, resultats2, type = "b", pch = 16, col = "blue", xlab = "Mois de l'année", ylab = "Nombre d'accidents", main = "Nombre d'accidents par mois en 2009", ylim=c(0, 8000))
+# dev.off()
 
-# a <- plot(df$hours, df$gravity, main = "gravité en fonction de l'heure", xlab = "heure", ylab = "gravité", col = "blue", pch = 19)
-
-# b <- plot(df$weeks,df$gravity, main = "number of accident by weeks", xlab = "weeks", ylab = "number of accident")
-
+# png(file = "./export/frise_chrono_acc_weeks.png")
+# plot(valeurs, resultats, type = "b", pch = 16, col = "blue", xlab = "Semaines de l'année", ylab = "Nombre d'accidents", main = "Nombre d'accidents par semaine en 2009", ylim=c(0, 2000))
+# dev.off()
 
