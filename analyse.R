@@ -62,3 +62,16 @@ dev.off()
 png(file = "./export/ressidus_mois.png")
 plot(gravity.lm2, 2)
 dev.off()
+
+# r-carré
+week_r2 <- summary(gravity_lm1)$r.squared
+month_r2 <- summary(gravity_lm2)$r.squared
+
+# r-carré ajusté
+week_r2_ajusted <- summary(gravity_lm1)$adj.r.squared
+month_r2_ajusted <- summary(gravity_lm2)$adj.r.squared
+
+print(week_r2)
+print(month_r2)
+print(week_r2_ajusted)
+print(month_r2_ajusted)
