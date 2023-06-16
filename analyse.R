@@ -1,4 +1,6 @@
-# analyse des données
+################
+# ANALYSE #
+################
 
 
 # khi entre gravité et poids
@@ -29,13 +31,34 @@ mosaicplot(table(df$etat_surf_num, df$athmo_num), color = ("skyblue2"), main = "
 dev.off()
 d <- khi_test$p.value
 
+# khi entre gravité et luminosité
 khi_test <- chisq.test(table(df$lum_num, df$gravity))
 png(file = "export/mosaic_lum_gravite.png")
 mosaicplot(table(df$etat_surf_num, df$athmo_num), color=brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre la luminosité et gravité")
 dev.off()
 f <- khi_test$p.value
 
+# khi entre gravité et age naissance / normalement contient une p-value grande car pas de dépendance apparente
 khi_test <- chisq.test(table(df$an_nais, df$id_usa))
 e <- khi_test$p.value
 
 cat("gravité et poids :", a, "\ngravité et etat surface :", b, "\ngravité et athmo :", c, "\netat surf et athmo :", d, "\n", "id_usa et age naissance : ", e,"\ngravité et lumi : ",f ,"\n")
+
+
+# tracer les regression lineaires
+png(file = "./export/regression_lineaire_semaine.png")
+scatterplot(weeks_gravity_cumul ~ weeks_cumul, data = df)
+dev.off()
+png(file = "./export/regression_lineaire_mois.png")
+scatterplot(month_gravity_cumul ~ month_cumul, data = df)
+dev.off()
+
+# réaliser la regression lineaire simple
+gravity.lm1 <- lm(weeks_gravity_cumul ~ weeks_cumul, data = df)
+gravity.lm2 <- lm(month_gravity_cumul ~ month_cumul, data = df)
+png(file = "./export/ressidus_semaine.png")
+plot(gravity.lm1, 2)
+dev.off()
+png(file = "./export/ressidus_mois.png")
+plot(gravity.lm2, 2)
+dev.off()

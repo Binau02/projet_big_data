@@ -18,5 +18,3 @@ dev.off()
 png(file = "./export/ressidus_mois.png")
 plot(gravity.lm2, 2)
 dev.off()
-
-#
