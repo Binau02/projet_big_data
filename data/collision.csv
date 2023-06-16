@@ -1,0 +1,8 @@
+descr_type_col;type
+Deux véhicules - Frontale;1
+Deux véhicules – Par l’arrière;2
+Deux véhicules – Par le coté;3
+Sans collision;4
+Trois véhicules et plus – Collisions multiples;5
+Trois véhicules et plus – En chaîne;6
+Autre collision;7

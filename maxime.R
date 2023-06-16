@@ -23,40 +23,40 @@
 # # etatclimat <- rbind(a, b)
 
 
-# # khi entre gravité et poids
-# khi_test <- chisq.test(table(df$weight, df$gravity))
-# png(file = "export/mosaic_gravite_poids.png")
-# mosaicplot(table(df$gravity, df$weight), color = brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre gravité et poids")
-# dev.off()
-# # print(khi_test)
-# a <- khi_test$p.value
+# khi entre gravité et poids
+khi_test <- chisq.test(table(df$weight, df$gravity))
+png(file = "export/mosaic_gravite_poids.png")
+mosaicplot(table(df$gravity, df$weight), color = brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre gravité et poids")
+dev.off()
+# print(khi_test)
+a <- khi_test$p.value
 
-# # khi entre gravité et état de la route
-# khi_test <- chisq.test(table(df$gravity, df$etat_surf_num))
-# png(file = "export/mosaic_gravite_etat_route.png")
-# mosaicplot(table(df$gravity, df$etat_surf_num), color = brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre gravité et etat de la surface")
-# dev.off()
-# # print(khi_test)
-# # print(khi_test$p.value)
-# b <- khi_test$p.value
+# khi entre gravité et état de la route
+khi_test <- chisq.test(table(df$gravity, df$etat_surf_num))
+png(file = "export/mosaic_gravite_etat_route.png")
+mosaicplot(table(df$gravity, df$etat_surf_num), color = brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre gravité et etat de la surface")
+dev.off()
+# print(khi_test)
+# print(khi_test$p.value)
+b <- khi_test$p.value
 
-# # khi entre gravité et état de l'atmosphère
-# khi_test <- chisq.test(table(df$gravity, df$athmo_num))
-# png(file = "export/mosaic_gravite_etat_atmosphere.png")
-# mosaicplot(table(df$gravity, df$athmo_num), color = brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre gravité et athmosphère")
-# dev.off()
-# # print(khi_test)
-# # print(khi_test$p.value)
-# c <- khi_test$p.value
+# khi entre gravité et état de l'atmosphère
+khi_test <- chisq.test(table(df$gravity, df$athmo_num))
+png(file = "export/mosaic_gravite_etat_atmosphere.png")
+mosaicplot(table(df$gravity, df$athmo_num), color = brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre gravité et athmosphère")
+dev.off()
+# print(khi_test)
+# print(khi_test$p.value)
+c <- khi_test$p.value
 
-# # khi entre gravité état de la route et l'atmosphère
-# khi_test <- chisq.test(table(df$etat_surf_num, df$athmo_num))
-# png(file = "export/mosaic_etat_surface_etat_atmosphere.png")
-# mosaicplot(table(df$etat_surf_num, df$athmo_num), color = brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre etat de la surface et athmosphère")
-# dev.off()
-# # print(khi_test)
-# # print(khi_test$p.value)
-# d <- khi_test$p.value
+# khi entre gravité état de la route et l'atmosphère
+khi_test <- chisq.test(table(df$etat_surf_num, df$athmo_num))
+png(file = "export/mosaic_etat_surface_etat_atmosphere.png")
+mosaicplot(table(df$etat_surf_num, df$athmo_num), color = brewer.pal(n = 10, name = "Spectral"), main = "mosaic entre etat de la surface et athmosphère")
+dev.off()
+# print(khi_test)
+# print(khi_test$p.value)
+d <- khi_test$p.value
 
 # khi_test <- chisq.test(table(df$an_nais, df$id_usa))
 # # print(khi_test)
