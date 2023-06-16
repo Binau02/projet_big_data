@@ -3,19 +3,19 @@
 ################
 
 
-# install.packages("tidyverse")
-# install.packages("dplyr")
-# install.packages("sf")
-# install.packages("ggplot2")
-# install.packages("car")
+install.packages("tidyverse")
+install.packages("dplyr")
+install.packages("sf")
+install.packages("ggplot2")
+install.packages("car")
 
-# library(tidyverse)
-# library(dplyr)
-# library(sf)
-# library(ggplot2)
-# library(tmap)
-# library(leaflet)
-# library(car)
+library(tidyverse)
+library(dplyr)
+library(sf)
+library(ggplot2)
+library(tmap)
+library(leaflet)
+library(car)
 
 
 # lire données
@@ -27,6 +27,10 @@ etat <- read.csv("data/etat.csv", sep = ";")
 lum <- read.csv("data/lum.csv", sep = ",")
 dept <- read.csv("data/departements-france.csv")
 coords <- read.csv("data/insee-lat-lon.csv")
+motif <- read.csv("data/motif.csv", sep = ";")
+intersection <- read.csv("data/intersection.csv", sep = ";")
+collision <- read.csv("data/collision.csv", sep = ";")
+agglo <- read.csv("data/agglo.csv", sep = ";")
 
 # préparation des données pour la latitude et la longitude
 for (i in seq_len(nrow(df))) {
@@ -106,3 +110,24 @@ for (i in seq_len(nrow(etat))) {
 for (i in seq_len(nrow(lum))) {
   df$lum_num[df$descr_lum == lum[i, 1]] <- as.numeric(lum[i, 2])
 }
+
+# préparation des données pour les intersections, collisions, motifs et agglomérations
+# pour l'export pour l'ia
+for (i in seq_len(nrow(collision))) {
+  df$collision_num[df$descr_type_col == collision[i, 1]] <- as.numeric(collision[i, 2])
+}
+
+for (i in seq_len(nrow(intersection))) {
+  df$intersection_num[df$description_intersection == intersection[i, 1]] <- as.numeric(intersection[i, 2])
+}
+
+for (i in seq_len(nrow(motif))) {
+  df$motif_num[df$descr_motif_traj == motif[i, 1]] <- as.numeric(motif[i, 2])
+}
+
+for (i in seq_len(nrow(agglo))) {
+  df$agglo_num[df$descr_agglo == agglo[i, 1]] <- as.numeric(agglo[i, 2])
+}
+
+# export pour l'ia
+write.table(df, file = "export/stat_acc_V3_modified.csv", sep = ";", row.names = FALSE, col.names = TRUE, quote = FALSE)
