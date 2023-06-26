@@ -25,7 +25,6 @@ climat <- read.csv("data/climat.csv", sep = ";")
 etat <- read.csv("data/etat.csv", sep = ";")
 lum <- read.csv("data/lum.csv", sep = ",")
 dept <- read.csv("data/departements-france.csv")
-dispo <- read.csv("data/dispositif_securite.csv", sep = ";")
 
 for (i in seq_len(nrow(weights))) {
   df$weight[df$descr_cat_veh == weights[i, 1]] <- as.numeric(weights[i, 2])
@@ -98,8 +97,4 @@ for (i in seq_len(nrow(etat))) {
 
 for (i in seq_len(nrow(lum))) {
   df$lum_num[df$descr_lum == lum[i, 1]] <- as.numeric(lum[i, 2])
-}
-
-for (i in seq_len(nrow(dispo))) {
-  df$dispo_secu_num[df$descr_dispo_secu == dispo[i, 1]] <- as.numeric(dispo[i, 2])
 }

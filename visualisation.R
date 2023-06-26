@@ -2,6 +2,8 @@
 # DATA visualisation #
 ######################
 
+install.packages("RColorBrewer")
+library(RColorBrewer)
 
 # plot by age
 png(file = "./export/nb_acc_par_age.png")
@@ -187,10 +189,13 @@ for (i in 1:12) {
   resultat2 <- sum(df$month == valeurs2[i])
   resultats2[i] <- resultat2
 }
+
+# frise chronologique par mois
 png(file = "./export/frise_chrono_acc_months.png")
 plot(valeurs2, resultats2, type = "b", pch = 16, col = "blue", xlab = "Mois de l'année", ylab = "Nombre d'accidents", main = "Nombre d'accidents par mois en 2009", ylim=c(0, 8000))
 dev.off()
 
+# frise chronologique par semaine
 png(file = "./export/frise_chrono_acc_weeks.png")
 plot(valeurs, resultats, type = "b", pch = 16, col = "blue", xlab = "Semaines de l'année", ylab = "Nombre d'accidents", main = "Nombre d'accidents par semaine en 2009", ylim=c(0, 2000))
 dev.off()
